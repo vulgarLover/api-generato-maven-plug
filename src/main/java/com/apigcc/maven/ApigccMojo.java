@@ -40,13 +40,13 @@ public class ApigccMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        if(getPluginContext().containsKey("project") && getPluginContext().get("project") instanceof MavenProject){
+        if (getPluginContext().containsKey("project") && getPluginContext().get("project") instanceof MavenProject) {
             project = (MavenProject) getPluginContext().get("project");
             build();
         }
     }
 
-    private void build(){
+    private void build() {
         Context context = new Context();
         if (source != null) {
             for (String dir : source.split(",")) {
@@ -59,7 +59,7 @@ public class ApigccMojo extends AbstractMojo {
             for (String dir : dependency.split(",")) {
                 context.addDependency(abs(dir));
             }
-        }else{
+        } else {
             MavenProject parent = findParent(project);
             context.addDependency(parent.getBasedir().toPath());
         }
@@ -68,7 +68,7 @@ public class ApigccMojo extends AbstractMojo {
                 context.addJar(abs(dir));
             }
         }
-        context.setId(id != null?id:project.getName());
+        context.setId(id != null ? id : project.getName());
         if (build != null) {
             context.setBuildPath(abs(build));
         } else {
@@ -81,12 +81,12 @@ public class ApigccMojo extends AbstractMojo {
         }
         if (description != null) {
             context.setDescription(description);
-        } else if (project.getDescription()!=null) {
+        } else if (project.getDescription() != null) {
             context.setDescription(project.getDescription());
         }
-        if (version != null){
+        if (version != null) {
             context.setVersion(version);
-        } else if (project.getVersion()!=null){
+        } else if (project.getVersion() != null) {
             context.setVersion(project.getVersion());
         }
         if (css != null) {
@@ -99,18 +99,18 @@ public class ApigccMojo extends AbstractMojo {
 
     }
 
-    private MavenProject findParent(MavenProject mp){
-        if(mp.getParentFile()!=null && mp.getParentFile().exists()){
+    private MavenProject findParent(MavenProject mp) {
+        if (mp.getParentFile() != null && mp.getParentFile().exists()) {
             return findParent(mp.getParent());
         }
         return mp;
     }
 
-    private Path abs(String dir){
+    private Path abs(String dir) {
         Path path = Paths.get(dir);
-        if(path.isAbsolute()){
+        if (path.isAbsolute()) {
             return path;
-        }else{
+        } else {
             return project.getBasedir().toPath().resolve(path);
         }
     }
