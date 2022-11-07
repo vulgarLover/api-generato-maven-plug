@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 /**
  * generate rest doc with apigcc
  */
-@Mojo(name = "build")
+@Mojo(name = "apigcc")
 public class ApigccMojo extends AbstractMojo {
 
     MavenProject project;

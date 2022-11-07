@@ -54,12 +54,12 @@
         <dependency>
             <groupId>com.apigcc</groupId>
             <artifactId>apigcc-springmvc</artifactId>
-            <version>${version}</version>
+            <version>1.7.0</version>
         </dependency>
         <dependency>
             <groupId>com.apigcc</groupId>
             <artifactId>apigcc-core</artifactId>
-            <version>${version}</version>
+            <version>1.7.0</version>
         </dependency>
     </dependencies>
 
@@ -68,6 +68,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -109,8 +110,9 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray-apigcc-maven</id>
-            <url>https://api.bintray.com/maven/apigcc/maven/apigcc-maven-plugin/;publish=1</url>
+            <id>releases</id>
+            <name>releases</name>
+            <url>https://nexus.ysarsw.com/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
 
