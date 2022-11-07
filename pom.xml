@@ -10,7 +10,7 @@
 
     <name>apigcc-maven-plugin</name>
     <description>easy use apigcc with maven.</description>
-    <url>https://github.com/apigcc/apigcc-maven-plugin</url>
+    <url>https://gitee.com/ysar/apigcc-maven-plugin</url>
     <licenses>
         <license>
             <name>MIT License</name>
@@ -18,15 +18,15 @@
     </licenses>
     <developers>
         <developer>
-            <id>ayz6uem</id>
-            <name>ayz6uem</name>
-            <email>360188606@qq.com</email>
+            <id>ysar</id>
+            <name>ysar</name>
+            <email>18534513215@qq.com</email>
         </developer>
     </developers>
     <scm>
-        <connection>https://github.com/apigcc/apigcc-maven-plugin.git</connection>
-        <developerConnection>https://github.com/apigcc/apigcc-maven-plugin.git</developerConnection>
-        <url>https://github.com/apigcc/apigcc-maven-plugin.git</url>
+        <connection>https://gitee.com/ysar/apigcc-maven-plugin.git</connection>
+        <developerConnection>https://gitee.com/ysar/apigcc-maven-plugin.git</developerConnection>
+        <url>https://gitee.com/ysar/apigcc-maven-plugin.git</url>
     </scm>
 
     <properties>
