@@ -31,6 +31,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <packaging>maven-plugin</packaging>
@@ -54,12 +55,7 @@
         <dependency>
             <groupId>com.apigcc</groupId>
             <artifactId>apigcc-springmvc</artifactId>
-            <version>1.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.apigcc</groupId>
-            <artifactId>apigcc-core</artifactId>
-            <version>1.7.0</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
