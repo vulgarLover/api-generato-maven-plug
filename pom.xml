@@ -5,17 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ysar</groupId>
-    <artifactId>apigcc-maven-plugin</artifactId>
+    <artifactId>api-generator-maven-plugin</artifactId>
     <version>1.0.0</version>
 
-    <name>apigcc-maven-plugin</name>
-    <description>easy use apigcc with maven.</description>
+    <name>api-generator-maven-plugin</name>
+    <description>easy use api generator with maven.</description>
     <url>https://gitee.com/ysar/apigcc-maven-plugin</url>
-    <licenses>
-        <license>
-            <name>MIT License</name>
-        </license>
-    </licenses>
     <developers>
         <developer>
             <id>ysar</id>
@@ -54,7 +49,7 @@
         </dependency>
         <dependency>
             <groupId>com.ysar</groupId>
-            <artifactId>apigcc-springmvc</artifactId>
+            <artifactId>api-generator</artifactId>
             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>

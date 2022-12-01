@@ -1,8 +1,8 @@
 package com.ysar.maven;
 
-import com.alibaba.fastjson.JSON;
-import com.ysar.core.Apigcc;
-import com.ysar.core.Context;
+import com.ysar.api.generator.constant.enums.ThirdServerEnum;
+import com.ysar.api.generator.core.Apigcc;
+import com.ysar.api.generator.core.Context;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -14,35 +14,33 @@ import java.nio.file.Paths;
 /**
  * generate rest doc with apigcc
  */
-@Mojo(name = "apigcc")
-public class ApigccMojo extends AbstractMojo {
+@Mojo(name = "api-generator")
+public class ApiGeneratorMojo extends AbstractMojo {
 
     MavenProject project;
 
     @Parameter
-    String id;
+    private String name;
     @Parameter
-    String name;
+    private String description;
     @Parameter
-    String description;
-    @Parameter
-    String build;
+    private String build;
     //传字符串，使用逗号分隔
     @Parameter
-    String source;
+    private String source;
     @Parameter
-    String dependency;
+    private String dependency;
     @Parameter
-    String jar;
+    private String jar;
     // 要上传的服务类型，暂时只支持 yapi
-    @Parameter
-    String targetServer;
+    @Parameter(defaultValue = "YAPI")
+    private ThirdServerEnum targetServer;
     // 上传目标服务的接口地址
-    @Parameter
-    String serverUrl;
+    @Parameter(required = true)
+    private String serverUrl;
     // 针对于yapi中的项目的token
-    @Parameter
-    String projectToken;
+    @Parameter(required = true)
+    private String projectToken;
 
     @Override
     public void execute() {
@@ -74,7 +72,6 @@ public class ApigccMojo extends AbstractMojo {
                 context.addJar(abs(dir));
             }
         }
-//        context.setId(id != null ? id : project.getName());
         if (build != null) {
             context.setBuildPath(abs(build));
         } else {
@@ -90,9 +87,6 @@ public class ApigccMojo extends AbstractMojo {
         } else if (project.getDescription() != null) {
             context.setDescription(project.getDescription());
         }
-        if (targetServer == null) {
-            throw new RuntimeException("请配置目标应用: targetServer");
-        }
         if (serverUrl == null) {
             throw new RuntimeException("目标服务url不能为空 serverUrl");
         }
@@ -100,10 +94,9 @@ public class ApigccMojo extends AbstractMojo {
             serverUrl = serverUrl.substring(0, serverUrl.length() - 1);
         }
         context.setServerUrl(serverUrl);
-        context.setTargetServer(targetServer);
+        context.setTargetServer(com.ysar.api.generator.constant.enums.ThirdServerEnum.YAPI);
         context.setProjectToken(projectToken);
 
-        System.out.println(JSON.toJSONString(context));
         Apigcc apigcc = new Apigcc(context);
         apigcc.parse();
         apigcc.upload();
@@ -131,14 +124,6 @@ public class ApigccMojo extends AbstractMojo {
 
     public void setProject(MavenProject project) {
         this.project = project;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -189,11 +174,11 @@ public class ApigccMojo extends AbstractMojo {
         this.jar = jar;
     }
 
-    public String getTargetServer() {
+    public ThirdServerEnum getTargetServer() {
         return targetServer;
     }
 
-    public void setTargetServer(String targetServer) {
+    public void setTargetServer(ThirdServerEnum targetServer) {
         this.targetServer = targetServer;
     }
 
