@@ -11,9 +11,6 @@ import org.apache.maven.project.MavenProject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * generate rest doc with apigcc
- */
 @Mojo(name = "api-generator")
 public class ApiGeneratorMojo extends AbstractMojo {
 
@@ -33,13 +30,13 @@ public class ApiGeneratorMojo extends AbstractMojo {
     @Parameter
     private String jar;
     // 要上传的服务类型，暂时只支持 yapi
-    @Parameter(defaultValue = "YAPI")
+    @Parameter(property = "targetServer", defaultValue = "YAPI")
     private ThirdServerEnum targetServer;
     // 上传目标服务的接口地址
-    @Parameter(required = true)
+    @Parameter(property = "serverUrl", required = true)
     private String serverUrl;
     // 针对于yapi中的项目的token
-    @Parameter(required = true)
+    @Parameter(property = "projectToken", required = true)
     private String projectToken;
 
     @Override
@@ -102,11 +99,11 @@ public class ApiGeneratorMojo extends AbstractMojo {
         apigcc.upload();
     }
 
-    private MavenProject findParent(MavenProject mp) {
-        if (mp.getParentFile() != null && mp.getParentFile().exists()) {
-            return findParent(mp.getParent());
+    private MavenProject findParent(MavenProject mavenProject) {
+        if (mavenProject.getParentFile() != null && mavenProject.getParentFile().exists()) {
+            return findParent(mavenProject.getParent());
         }
-        return mp;
+        return mavenProject;
     }
 
     private Path abs(String dir) {
